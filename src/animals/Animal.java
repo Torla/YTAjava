@@ -1,5 +1,5 @@
 package animals;
 
-interface animal {
+interface Animal {
 
 }

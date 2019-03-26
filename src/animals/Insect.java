@@ -1,5 +1,7 @@
 package animals;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 import java.io.*;
 import java.util.LinkedList;
 
@@ -37,5 +39,22 @@ public class Insect implements Animal, Serializable {
 	@Override
 	public String toString() {
 		return name + " " + waysOfAnnoyingHumans.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj==null) return false;
+		if(! (obj instanceof Insect)) return false;
+		Insect insect = (Insect) obj;
+		//if the class extend now you call super
+		if(!name.equals(insect.name)) return false;
+		if(!waysOfAnnoyingHumans.equals(insect.waysOfAnnoyingHumans)) return false;
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		//not a good implementation of hash
+		return name.hashCode() + waysOfAnnoyingHumans.hashCode();
 	}
 }

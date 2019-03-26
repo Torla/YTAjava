@@ -14,6 +14,11 @@ public class Insect implements Animal, Serializable {
 		this.waysOfAnnoyingHumans = waysOfAnnoyingHumans;
 	}
 
+	public Insect(Insect insect){
+		this.name=insect.name;
+		this.waysOfAnnoyingHumans = new LinkedList<>(insect.waysOfAnnoyingHumans);
+	}
+
 	public void save(File file){
 		ObjectOutputStream os;
 		try {

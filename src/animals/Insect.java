@@ -30,14 +30,14 @@ public class Insect implements Animal, Serializable {
 	}
 
 	public static Insect load(File file) {
-		ObjectInputStream os;
+		ObjectInputStream os=null;
 		Object obj=null;
 		try {
 			os = new ObjectInputStream(new FileInputStream(file));
 			obj = os.readObject();
-			os.close();
 		}
 		catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
+		finally {if(os!=null) try {os.close();} catch (IOException e) {}}
 		return (Insect) obj;
 	}
 

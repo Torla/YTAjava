@@ -5,11 +5,11 @@ public class DataEx {
     final String nomeFile = "fileDiProvaData";
     File file = new File(nomeFile);
     DataOutputStream dataOutput=null;
+
     try {
       dataOutput = new DataOutputStream(new FileOutputStream(file)) ;
       dataOutput.writeInt(101);
       dataOutput.writeInt(102);
-
     } catch (IOException e) {
       e.printStackTrace();
     }

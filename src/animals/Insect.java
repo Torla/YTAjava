@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class Insect implements Animal, Serializable {
-	private String name;
+	public String name;
 	private LinkedList<String> waysOfAnnoyingHumans;
 
 	public Insect(String name, LinkedList<String> waysOfAnnoyingHumans) {

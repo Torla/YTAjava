@@ -9,6 +9,9 @@ public class Insect implements Animal, Serializable {
 	public String name;
 	private LinkedList<String> waysOfAnnoyingHumans;
 
+
+
+
 	public Insect(String name, LinkedList<String> waysOfAnnoyingHumans) {
 		this.name = name;
 		this.waysOfAnnoyingHumans = waysOfAnnoyingHumans;
@@ -16,7 +19,8 @@ public class Insect implements Animal, Serializable {
 
 	public Insect(Insect insect){
 		this.name=insect.name;
-		this.waysOfAnnoyingHumans = new LinkedList<>(insect.waysOfAnnoyingHumans);
+		//this.waysOfAnnoyingHumans = new LinkedList<>(insect.waysOfAnnoyingHumans);
+	  this.waysOfAnnoyingHumans = insect.waysOfAnnoyingHumans;
 	}
 
 	public void save(File file){
@@ -48,13 +52,15 @@ public class Insect implements Animal, Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
+	  // se null torno falso
 		if(obj==null) return false;
+		// controllo che obj sia instanza di insetto
 		if(! (obj instanceof Insect)) return false;
 		Insect insect = (Insect) obj;
 		//if the class extend now you call super
 		if(!name.equals(insect.name)) return false;
 		if(!waysOfAnnoyingHumans.equals(insect.waysOfAnnoyingHumans)) return false;
-		return false;
+		return true;
 	}
 
 	@Override

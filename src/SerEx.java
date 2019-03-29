@@ -16,6 +16,8 @@ public class SerEx {
 
 		insect = Insect.load(new java.io.File("insect"));
 
+		Insect insect1 = new Insect(insect);
+
 		System.out.println(insect);
 	}
 }

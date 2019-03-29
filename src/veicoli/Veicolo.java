@@ -67,4 +67,23 @@ public class Veicolo implements Serializable {
     return (Veicolo) object;
 
   }
+
+  @Override
+  public String toString() {
+    return "targa:" + targa + "cil" +cilindrata;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if(obj==null) return false;
+    if(!(obj instanceof Veicolo)) return false;
+    Veicolo veicolo2 = (Veicolo) obj;
+    if(!targa.equals(veicolo2.targa)) return false;
+    if(!cilindrata.equals(veicolo2.cilindrata))return false;
+    return true;
+  }
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
 }

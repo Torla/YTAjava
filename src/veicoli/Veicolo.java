@@ -1,6 +1,9 @@
 package veicoli;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class Veicolo implements Serializable {
@@ -70,7 +73,7 @@ public class Veicolo implements Serializable {
 
   @Override
   public String toString() {
-    return "targa:" + targa + "cil" +cilindrata;
+    return "targa:" + targa + " cil:" +cilindrata;
   }
 
   @Override
@@ -82,8 +85,54 @@ public class Veicolo implements Serializable {
     if(!cilindrata.equals(veicolo2.cilindrata))return false;
     return true;
   }
+
   @Override
   public int hashCode() {
-    return super.hashCode();
+    return targa.hashCode() + cilindrata;
   }
+
+  public String csvString(){
+    return String.format("%s,%d",targa,cilindrata);
+  }
+
+  public static void saveToCsv(File file, List<Veicolo> list){
+    BufferedWriter bufferedWriter=null;
+    try {
+      bufferedWriter = new BufferedWriter(new FileWriter(file));
+      for(Veicolo veicolo:list){
+        bufferedWriter.write(veicolo.csvString());
+        bufferedWriter.newLine();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    finally {
+      if(bufferedWriter!=null) try {
+        bufferedWriter.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public static List<Veicolo> loadFromCsv(File file){
+    ArrayList<Veicolo> ret = new ArrayList<>();
+    Scanner scanner=null;
+
+    try {
+      scanner = new Scanner(new BufferedReader(new FileReader(file)));
+      scanner.useDelimiter(",|\\r");
+      while(scanner.hasNext()){
+        ret.add(new Veicolo(scanner.next(),scanner.nextInt()));
+        scanner.nextLine();
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+    finally {
+      if(scanner!=null)scanner.close();
+    }
+    return ret;
+  }
+
 }

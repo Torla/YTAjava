@@ -101,7 +101,7 @@ public class Veicolo implements Serializable {
     return targa.hashCode() + cilindrata;
   }
 
-  private String csvString(){
+  protected String csvString(){
     return String.format("%s,%d,%s",targa,cilindrata,annoFabbricazione.format(formatter));
   }
 
@@ -128,6 +128,7 @@ public class Veicolo implements Serializable {
   public static List<Veicolo> loadFromCsv(File file){
     List<Veicolo> ret = new ArrayList<>();
     Scanner scanner=null;
+    Veicolo v=null;
 
     try {
       scanner = new Scanner(new BufferedReader(new FileReader(file)));
@@ -136,7 +137,19 @@ public class Veicolo implements Serializable {
         String targa = scanner.next();
         Integer cilindrata = scanner.nextInt();
         String anno = scanner.next();
-        Veicolo v = new Veicolo(targa,cilindrata,anno);
+        String tipo = scanner.next();
+        if(tipo.equals("m")){
+          Integer tempi = scanner.nextInt();
+          Integer rapporti = scanner.nextInt();
+          v = new Moto(targa,cilindrata,anno,tempi,rapporti);
+        }
+        else if(tipo.equals("a")){
+          Integer numPorte = scanner.nextInt();
+          v = new Automobile(targa,cilindrata,anno,numPorte);
+        }
+        else {
+          v = new Veicolo(targa, cilindrata, anno);
+        }
         ret.add(v);
         scanner.nextLine();
       }

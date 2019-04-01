@@ -1,6 +1,5 @@
 package veicoli;
 
-import java.io.ObjectInputStream;
 
 public class Automobile extends Veicolo {
 
@@ -20,5 +19,14 @@ public class Automobile extends Veicolo {
     Automobile automobile = (Automobile) obj;
     if(!numPorte.equals(automobile.numPorte)) return false;
     return true;
+  }
+  @Override
+  protected String csvString() {
+    return String.format("%s,a,%d",super.csvString(),numPorte);
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + " numPorte:" + numPorte;
   }
 }

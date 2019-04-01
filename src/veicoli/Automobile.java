@@ -3,7 +3,7 @@ package veicoli;
 
 public class Automobile extends Veicolo {
 
-  Integer numPorte;
+  private Integer numPorte;
 
 
   public Automobile(String targa, Integer cilindrata,String anno,Integer numPorte) {

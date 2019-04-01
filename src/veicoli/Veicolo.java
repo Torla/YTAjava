@@ -102,7 +102,7 @@ public class Veicolo implements Serializable {
   }
 
   protected String csvString(){
-    return String.format("%s,%d,%s",targa,cilindrata,annoFabbricazione.format(formatter));
+    return String.format("%s,%d,%s",targa,cilindrata,annoFabbricazione);
   }
 
   public static void saveToCsv(File file, List<Veicolo> list){
@@ -161,5 +161,7 @@ public class Veicolo implements Serializable {
     }
     return ret;
   }
+
+
 
 }

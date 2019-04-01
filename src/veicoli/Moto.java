@@ -1,15 +1,14 @@
 package veicoli;
 
 public class Moto extends Veicolo{
-  Integer tempi;
-  Integer rapporti;
+  private Integer tempi;
+  private Integer rapporti;
 
   public Moto(String targa, Integer cilindrata, String anno, Integer tempi, Integer rapporti) {
     super(targa, cilindrata, anno);
     this.tempi = tempi;
     this.rapporti = rapporti;
   }
-
 
   @Override
   protected String csvString() {

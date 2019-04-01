@@ -1,6 +1,10 @@
 package veicoli;
 
+import javax.xml.crypto.Data;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,11 +13,17 @@ import java.util.Scanner;
 public class Veicolo implements Serializable {
   private String targa;
   private Integer cilindrata;
+  Year annoFabbricazione;
 
-  public Veicolo(String targa, Integer cilindrata) {
+  static DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy");
+
+  public Veicolo(String targa, Integer cilindrata,String anno) {
     this.targa = targa;
     this.cilindrata = cilindrata;
+    this.annoFabbricazione = Year.parse(anno);
+
   }
+
 
   public String getTarga() {
     return targa;
@@ -73,7 +83,7 @@ public class Veicolo implements Serializable {
 
   @Override
   public String toString() {
-    return "targa:" + targa + " cil:" +cilindrata;
+    return "targa:" + targa + " cil:" +cilindrata + " anno di fabbricazione:" + annoFabbricazione.format(formatter);
   }
 
   @Override
@@ -91,8 +101,8 @@ public class Veicolo implements Serializable {
     return targa.hashCode() + cilindrata;
   }
 
-  public String csvString(){
-    return String.format("%s,%d",targa,cilindrata);
+  private String csvString(){
+    return String.format("%s,%d,%s",targa,cilindrata,annoFabbricazione.format(formatter));
   }
 
   public static void saveToCsv(File file, List<Veicolo> list){
@@ -116,14 +126,18 @@ public class Veicolo implements Serializable {
   }
 
   public static List<Veicolo> loadFromCsv(File file){
-    ArrayList<Veicolo> ret = new ArrayList<>();
+    List<Veicolo> ret = new ArrayList<>();
     Scanner scanner=null;
 
     try {
       scanner = new Scanner(new BufferedReader(new FileReader(file)));
       scanner.useDelimiter(",|\\r");
       while(scanner.hasNext()){
-        ret.add(new Veicolo(scanner.next(),scanner.nextInt()));
+        String targa = scanner.next();
+        Integer cilindrata = scanner.nextInt();
+        String anno = scanner.next();
+        Veicolo v = new Veicolo(targa,cilindrata,anno);
+        ret.add(v);
         scanner.nextLine();
       }
     } catch (FileNotFoundException e) {

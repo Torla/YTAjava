@@ -7,8 +7,8 @@ public class Automobile extends Veicolo {
   Integer numPorte;
 
 
-  public Automobile(String targa, Integer cilindrata,Integer numPorte) {
-    super(targa, cilindrata);
+  public Automobile(String targa, Integer cilindrata,String anno,Integer numPorte) {
+    super(targa, cilindrata,anno);
     this.numPorte=numPorte;
   }
 

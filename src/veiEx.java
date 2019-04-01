@@ -5,8 +5,8 @@ import java.io.File;
 public class veiEx {
   public static void main(String[] args) {
     // instanzio un veicolo
-    Veicolo veicolo = new Veicolo("er900na", 80);
-    Veicolo veicolo2 = new Veicolo("er900na", 80);
+    Veicolo veicolo = new Veicolo("er900na", 80,"1092");
+    Veicolo veicolo2 = new Veicolo("er900na", 80,"1022");
     // dichiaro il File
     File file = new File("veicolo");
     // chiamo il metodo save passandoli
